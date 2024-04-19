@@ -1,0 +1,16 @@
+[
+  {
+    "container": "firefox",
+    "username": "demo",
+    "password": "demopassword",
+    "id": 0,
+    "time": 1713377196041
+  },
+  {
+    "container": "firefox",
+    "username": "scott",
+    "password": "rocket",
+    "id": 1,
+    "time": 1713466208502
+  }
+]
