@@ -7,8 +7,7 @@ git add .
 
 git commit -m "$1"
 
-echo "TylerSelden
-$(cat ~/.git/key)
+echo "$(cat ~/.git/key)
 " | git push -u origin main
 
 exit 0
