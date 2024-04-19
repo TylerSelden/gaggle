@@ -8,6 +8,6 @@ git add .
 git commit -m "$1"
 
 echo "$(cat ~/.git/key)
-" | git push -u origin main
+" | sleep 2 | git push -u origin main
 
 exit 0
