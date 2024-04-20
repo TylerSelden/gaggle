@@ -2,7 +2,7 @@ const fs = require('fs');
 
 var sessions = [];
 
-function session(container, username, password, id) {
+function session(container, username, password, id, dev) {
   // username must be only letters
   // password must be alphanumeric, with !@#$%^&*()_-+= allowed
   // id must be a number
