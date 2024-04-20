@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Gaggle</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="module" crossorigin="true" src="script.js"></script>
+  </head>
+  <body>
+    <div class="login centered">
+      <h2>Log in</h2>
+  		<br>
+  		<label for="username">Username:</label>
+  		<input type="text" placeholder="Username" id="username" name="username" onkeydown="if (event.keyCode == 13) login()">
+  		<br><br>
+  		<label for="password">Password:</label>
+  		<input type="password" placeholder="Password" id="password" name="password" onkeydown="if (event.keyCode == 13) login()">
+  		<br><br>
+	 		<button onclick="login()" id="login">Log in</button>
+    </div>
+    <div id="screen" class="hidden"></div>
+  </body>
+</html>
