@@ -7,6 +7,8 @@ window.onload = function() {
 	tmp.forEach((elem) => {
 		elems[elem.id] = elem;
 	});
+	elems.username.focus();
+	load();
 }
 
 function login() {
@@ -16,6 +18,8 @@ function login() {
 		
 		credentials.username = elems.username.value;
 		credentials.password = elems.password.value;
+
+		save();
 
 		elems.login_container.classList.add("hidden");
 		elems.panel_container.classList.remove("hidden");
@@ -34,4 +38,22 @@ function get_sessions() {
 		
 		tier[2].update_table(sessions);
 	});
+}
+
+
+function save() {
+	var data = { credentials, dark_mode: document.body.classList.contains("dark-mode") };
+	localStorage.setItem("gaggle_data", JSON.stringify(data));
+}
+
+function load() {
+	var data = JSON.parse(localStorage.getItem("gaggle_data"));
+	if (!data) return;
+
+	credentials = data.credentials;
+	elems.username.value = credentials.username;
+	elems.password.value = credentials.password;
+	elems.login.focus();
+
+	if (data.dark_mode) document.body.classList.add("dark-mode");
 }

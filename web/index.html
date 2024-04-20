@@ -2,13 +2,14 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>G.A.G. Admin Panel</title>
+		<title>Gaggle Admin Panel</title>
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<link rel="stylesheet" href="style.css?v=2">
+		<link rel="stylesheet" href="dark-mode.css?v=2">
 	</head>
 	<body>
 		<div class="centered" id="login_container">
-			<div class="buffer"></div>
+			<div style="height: 35vh;"></div>
 			<h2>Log in</h2>
 			<br>
 			<label for="username">Username:</label>
@@ -17,18 +18,21 @@
 			<label for="password">Password:</label>
 			<input type="password" placeholder="Password" id="password" name="password" onkeydown="if (event.keyCode == 13) login()">
 			<br><br>
-			<button onclick="login()">Log in</button>
+			<button onclick="login()" id="login">Log in</button>
 		</div>
 		<div class="centered hidden" id="panel_container">
 			<header>
-				<h1>Admin Panel</h1>
-				<button>Dark Mode</button>
+				<h1>Gaggle Admin Panel</h1>
+				<button onclick="document.body.classList.toggle('dark-mode'); save()">Dark Mode</button>
 			</header>
 			<br><br>
 			<h2>Heads up!</h2>
-			<p>Development on Tier 3 is ongoing, so frequent outages may occur.</p>
+			<p>Development is ongoing, so outages may occur.</p>
 			<div class="panel">
-				<h2 class="placeholder">Tier 1 is in development...</h2>
+				<div class="placeholder">
+					<h2>This panel is under development...</h2>
+					<p>This panel will serve as the admin message board, allowing system administrators to seamlessly communicate with each other about important matters regarding the system.</p>
+				</div>
 			</div>
 
 			<div class="panel">
@@ -68,7 +72,26 @@
 			</div>
 
 			<div class="panel">
-				<h2 class="placeholder">Tier 3 is in development...</h2>
+				<div class="placeholder">
+					<h2>This panel is under development...</h2>
+					<p>This panel will serve as the user message board, which will allow users to send messages to administrators through the application.</p>
+				</div>
+			</div>
+			<div class="panel changelog">
+				<h2>Changelog</h2>
+				<div class="uncentered">
+					<p class="bold">Version 0.82.1</p>
+					<ul>
+						<li>Added savedata system</li>
+						<li>Added dark mode</li>
+						<li>Added changelog</li>
+					</ul>
+					<p class="bold">Version 0.72.0</p>
+					<ul>
+						<li>Added uptime to sessions</li>
+						<li>Added container selection for new sessions</li>
+				</div>
+				<div style="height: 40px;"></div>
 			</div>
 		</div>
 		<script src="utils.js?v=2"></script>
