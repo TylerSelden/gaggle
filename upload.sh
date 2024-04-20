@@ -3,11 +3,12 @@ if [ "$#" -ne 1 ]; then
         exit 1
 fi
 
+
+cp -r /var/www/html ./web
+
+
 git add .
-
 git commit -m "$1"
-
-echo "$(cat ~/.git/key)
-" | sleep 2 | git push -u origin main
+git push -u origin main
 
 exit 0

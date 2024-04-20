@@ -1,0 +1,179 @@
+body, body * {
+	font-family: "Roboto";
+	color: #000;
+}
+
+html, body {
+	overflow-x: hidden;
+	margin: 0;
+	padding: 0;
+}
+
+label {
+	cursor: text;
+}
+
+p {
+	max-width: 32%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+input, select {
+	width: 17vw;
+	height: 30px;
+	border: 1px solid #8a8a8a;
+	border-radius: 2px;
+	text-align: center;
+	font-size: 1em;
+}
+
+button {
+	background-color: #f0f0f0;
+	margin: auto;
+	width: 10vw;
+	height: 30px;
+	border: 1px solid #8a8a8a;
+	text-align: center;
+	cursor: pointer;
+	font-size: 0.75em;
+}
+
+button:hover {
+	background-color: #e0e0e0;
+}
+
+button:active {
+	background-color: #c8c8c8;
+}
+
+header {
+	z-index: 100;
+	display: flex;
+	width: 100vw;
+	background-color: #ddd;
+	
+	align-items: center;
+	text-align: left;
+	padding: 15px;
+}
+
+header h1 {
+	margin: 0;
+}
+
+header button {
+	margin-right: 25px;
+}
+
+
+
+.panel {
+	margin: auto;
+	border: 2px solid black;
+	border-radius: 4px;
+	width: 70vw;
+	min-height: 20vh;
+	max-height: 60vh;
+	overflow-y: scroll;
+	margin-bottom: 30px;
+}
+
+.panel:first-of-type {
+	margin-top: 60px;
+}
+
+div:has(> .placeholder) {
+	display: table;
+}
+
+.placeholder{
+	display: table-cell;
+	vertical-align: middle;
+	color: #7c7c7c;
+	cursor: default;
+}
+
+
+table {
+	table-layout: fixed;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+th:first-of-type, td:first-of-type {
+	width: 8%;
+}
+
+td, th {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	border: 1px solid #ddd;
+	text-align: left;
+	padding: 8px;
+}
+
+table button, table input, table select {
+	width: 90%;
+	display: block;
+	margin: auto;
+}
+
+tr:nth-child(even) {
+	background-color: #ddd;
+}
+
+
+
+
+
+.centered {
+	margin: auto;
+	text-align: center;
+}
+
+.buffer {
+	height: 20vh;
+}
+
+.hidden {
+	display: none;
+}
+
+.red {
+	color: #c22;
+	font-weight: bold;
+}
+
+.green {
+	color: #292;
+	font-weight: bold;
+}
+
+@media only screen and (max-width: 700px) {
+	input {
+		width: 25%;
+	}
+	button {
+		width: 15vw;
+	}
+	p {
+		max-width: 45%;
+	}
+	.panel {
+		width: 90vw;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	input {
+		width: 50vw;
+	}
+	button {
+		width: 30vw;
+	}
+	p {
+		max-width: 90%;
+	}
+}
