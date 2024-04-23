@@ -19,7 +19,7 @@ p {
 	margin-right: auto;
 }
 
-input {
+input, select {
 	width: 17vw;
 	height: 30px;
 	border: 1px solid #8a8a8a;
@@ -70,13 +70,17 @@ header button {
 
 .panel {
 	margin: auto;
-	border: 2px solid black;
+	border: 2px solid #000;
 	border-radius: 4px;
 	width: 70vw;
 	min-height: 20vh;
 	max-height: 60vh;
 	overflow-y: scroll;
 	margin-bottom: 30px;
+}
+
+.panel p {
+	max-width: 50%;
 }
 
 .panel:first-of-type {
@@ -91,7 +95,6 @@ div:has(> .placeholder) {
 	display: table-cell;
 	vertical-align: middle;
 	color: #7c7c7c;
-	cursor: default;
 }
 
 
@@ -114,7 +117,7 @@ td, th {
 	padding: 8px;
 }
 
-table button, table input {
+table button, table input, table select {
 	width: 90%;
 	display: block;
 	margin: auto;
@@ -124,8 +127,29 @@ tr:nth-child(even) {
 	background-color: #ddd;
 }
 
+ /* Color C22  for select options with .dev  when selected */
+.dev {
+	background-color: #c22 !important;
+	color: #fff;
+}
+.exp {
+  background-color: #f70 !important;
+  color: #fff;
+}
 
 
+
+.changelog p {
+	margin: 1em;
+}
+
+.changelog ul {
+	margin-left: 2em;
+}
+
+.changelog li {
+	margin-bottom: 1em;
+}
 
 
 .centered {
@@ -133,8 +157,8 @@ tr:nth-child(even) {
 	text-align: center;
 }
 
-.buffer {
-	height: 20vh;
+.uncentered, .uncentered * {
+	text-align: left;
 }
 
 .hidden {
@@ -142,13 +166,18 @@ tr:nth-child(even) {
 }
 
 .red {
-	color: #c22;
-	font-weight: bold;
+	color: #c22 !important;
+	font-weight: bold !important;
 }
 
 .green {
-	color: #292;
+	color: #292 !important;
+	font-weight: bold !important;
+}
+
+.bold {
 	font-weight: bold;
+	font-size: 1.3em;
 }
 
 @media only screen and (max-width: 700px) {

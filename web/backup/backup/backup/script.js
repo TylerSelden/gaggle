@@ -3,7 +3,7 @@ var sessions = [];
 var credentials = {};
 
 window.onload = function() {
-  var tmp = document.querySelectorAll("[id]");
+	var tmp = document.querySelectorAll("[id]");
 	tmp.forEach((elem) => {
 		elems[elem.id] = elem;
 	});
@@ -36,7 +36,7 @@ function get_sessions() {
 		if (res.code !== 0) return alert("Something went wrong.");
 		var sessions = res.data;
 		
-    session_manager.update_table(sessions);
+		tier[2].update_table(sessions);
 	});
 }
 

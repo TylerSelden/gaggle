@@ -1,13 +1,16 @@
 const fs = require('fs');
 
 var sessions = [];
+var messages = [];
 
 function session(container, username, password, id, dev) {
   // username must be only letters
   // password must be alphanumeric, with !@#$%^&*()_-+= allowed
   // id must be a number
 
-	if (container == undefined || !fs.existsSync(`/root/docker/goawayguardian/${container}`)) {
+	var path = "containers";
+	if (dev) path = "dev";
+	if (container == undefined || !fs.existsSync(`/root/node/gaggle/docker/${path}/${container}`)) {
 		throw "Invalid container";
 	}
 	if (username == undefined || !/^[a-zA-Z]+$/.test(username) || username.length > 20 || username.length < 3) {
@@ -27,6 +30,17 @@ function session(container, username, password, id, dev) {
 	this.time = Date.now();
 }
 
+function message(username, msg) {
+  if (typeof(username) !== "string") throw "Invalid username";
+  if (typeof(msg) !== "string" || msg.length < 1) throw "Invalid message";
+
+
+  this.msg = msg;
+  this.username = username;
+  this.time = Date.now();
+}
+
+
 function start_session(id) {
 	var session = sessions[id];
 
@@ -36,7 +50,7 @@ function start_session(id) {
 	var id = session.id;
 
 	var exec = require('child_process').exec;
-	var command = `/bin/bash /root/docker/goawayguardian/start.sh "${container}" "${username}" "${password}" ${id}`;
+  var command = `/bin/bash /root/node/gaggle/docker/start.sh "${container}" "${username}" "${password}" ${id}`;
 	exec(command, (error, stdout, stderr) => {
 		if (error) throw `Exec error: ${error}`;
 	});
@@ -45,10 +59,10 @@ function start_session(id) {
 function stop_session(id) {
 	if (sessions[id] == undefined) throw "Session not found";
 	var exec = require('child_process').exec;
-	var command = `/bin/bash /root/docker/goawayguardian/stop.sh ${id}`;
+  var command = `/bin/bash /root/node/gaggle/docker/stop.sh ${id}`;
 	exec(command, (error, stdout, stderr) => {
 		if (error) throw `Exec error: ${error}`;
 	});
 }
 
-module.exports = { sessions, session, start_session, stop_session };
+module.exports = { sessions, messages, session, message, start_session, stop_session };

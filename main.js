@@ -7,7 +7,7 @@ const md5 = require('md5');
 
 const app = express();
 var config = JSON.parse(fs.readFileSync('./secrets/config.json', 'utf8'));
-var { sessions, session, start_session, stop_session } = require('./utils.js');
+var { sessions, messages, session, message, start_session, stop_session } = require('./utils.js');
 
 var ssl = {
 	key: fs.readFileSync(config.key, 'utf8'),
@@ -20,7 +20,6 @@ app.use((err, req, res, next) => {
 	if (err.status == 400) return res.sendStatus(err.status);
 	next(err);
 });
-
 
 
 
@@ -105,11 +104,12 @@ app.post('/api/create_session', (req, res) => {
 		var username = req.body.session.username;
 		var password = req.body.session.password;
 		var container = req.body.session.container;
+		var dev = req.body.session.dev || false;
 		var id = sessions.indexOf(null);
 		
 		if (id < 0) id = sessions.length;
 
-		var new_session = new session(container, username, password, id);
+		var new_session = new session(container, username, password, id, dev);
 		sessions[id] = new_session;
 		start_session(id);
 
@@ -118,6 +118,41 @@ app.post('/api/create_session', (req, res) => {
 		send(res, 1, e);
 	}
 });
+
+app.post('/api/create_message', (req, res) => {
+  try {
+    if (!auth(req)) return send(res, 2);
+
+    var msg = new message(req.body.username, req.body.msg);
+    messages.push(msg);
+
+    send(res, 0, messages);
+  } catch (e) {
+    send(res, 1, e);
+  }
+});
+
+app.post('/api/get_messages', (req, res) => {
+  try {
+    if (!auth(req)) return send(res, 2);
+
+    send(res, 0, messages);
+  } catch (e) {
+    send(res, 1, e)
+  }
+});
+
+app.post('/api/delete_messages', (req, res) => {
+  try {
+    if (!auth(req)) return send(res, 2);
+
+    messages = [];
+
+    send(res, 0);
+  } catch (e) {
+    send(res, 1, e);
+  }
+})
 
 app.post('/api/delete_session', (req, res) => {
 	try {
@@ -146,7 +181,7 @@ app.post('/api/test', (req, res) => {
 
 
 
-load_sessions();
+load_data();
 https.createServer({
 	key: ssl.key,
 	cert: ssl.cert
@@ -156,14 +191,17 @@ console.log(`REST API running on port ${config.port}.`);
 
 // SIGINT handler
 
-function load_sessions() {
-	try {
-		var tmp = JSON.parse(fs.readFileSync(config.save_file, "utf-8"))
-		for (var i in tmp) {
+function load_data() {
+  try {
+    var tmp = JSON.parse(fs.readFileSync(config.save_file, "utf-8"))
+		for (var i in tmp.sessions) {
 			sessions[i] = tmp[i];
 			start_session(i);
-		}
-		console.log(`Restored ${sessions.length} sessions from ${config.save_file}`);
+    }
+    for (var i in tmp.messages) {
+      messages[i] = tmp.messages[i];
+    }
+		console.log(`Restored ${sessions.length} sessions and ${messages.length} messages from ${config.save_file}`);
 		setInterval(refresh, config.refresh_rate);
 	} catch(e) {
 		console.log(`Could not load sessions: ${e.toString()}`);
@@ -172,7 +210,7 @@ function load_sessions() {
 
 function refresh() {
 	try {
-		fs.writeFileSync(config.save_file, JSON.stringify(sessions, null, 2));
+		fs.writeFileSync(config.save_file, JSON.stringify({ sessions, messages }, null, 2));
 		config = JSON.parse(fs.readFileSync('./secrets/config.json', 'utf8'));
 	} catch (e) {
 		console.log("Error in refresh function.");
@@ -181,8 +219,8 @@ function refresh() {
 
 process.on('SIGINT', () => {
 	console.log(`\nSIGINT received, killing all ${sessions.length} sessions...`);
-	fs.writeFileSync(config.save_file, JSON.stringify(sessions, null, 2));
-	console.log("Saved sessions.");
+	fs.writeFileSync(config.save_file, JSON.stringify({ sessions, messages }, null, 2));
+	console.log(`Saved sessions and ${messages.length} messages.`);
 	for (var i in sessions) {
 		stop_session(i);
 	}
