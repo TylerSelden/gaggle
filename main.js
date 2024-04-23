@@ -193,10 +193,10 @@ console.log(`REST API running on port ${config.port}.`);
 
 function load_data() {
   try {
-    var tmp = JSON.parse(fs.readFileSync(config.save_file, "utf-8"))
-		for (var i in tmp.sessions) {
-			sessions[i] = tmp[i];
-			start_session(i);
+    var tmp = JSON.parse(fs.readFileSync(config.save_file, "utf-8"));
+    for (var i in tmp.sessions) {
+		  sessions[i] = tmp.sessions[i];
+		  if (tmp.metadata.sessions_killed) start_session(i);
     }
     for (var i in tmp.messages) {
       messages[i] = tmp.messages[i];
@@ -208,9 +208,21 @@ function load_data() {
 	}
 }
 
+function save_data() {
+  var data = {
+    sessions, messages,
+    metadata: {
+      sessions_killed: config.kill_sessions_on_stop
+    }
+  }
+  console.log(`Saving ${config.kill_sessions_on_stop ? "and killing " : ""}${sessions.length} sessions.`);
+  fs.writeFileSync(config.save_file, JSON.stringify(data, null, 2));
+  console.log(`Saved ${sessions.length} sessions and ${messages.length} messages.`);
+}
+
 function refresh() {
-	try {
-		fs.writeFileSync(config.save_file, JSON.stringify({ sessions, messages }, null, 2));
+  try {
+    save_data();
 		config = JSON.parse(fs.readFileSync('./secrets/config.json', 'utf8'));
 	} catch (e) {
 		console.log("Error in refresh function.");
@@ -218,13 +230,13 @@ function refresh() {
 }
 
 process.on('SIGINT', () => {
-	console.log(`\nSIGINT received, killing all ${sessions.length} sessions...`);
-	fs.writeFileSync(config.save_file, JSON.stringify({ sessions, messages }, null, 2));
-	console.log(`Saved sessions and ${messages.length} messages.`);
-	for (var i in sessions) {
-		stop_session(i);
-	}
-
-	console.log("All sessions stopped, exiting.");
-	process.exit();
+	console.log(`\nSIGINT received!`);
+  save_data();
+  if (config.kill_sessions_on_stop) {
+    for (var i in sessions) {
+		  stop_session(i);
+    }
+  }
+  console.log("Done!");
+  process.exit();
 });
