@@ -55,7 +55,7 @@ var session_manager = {
 	},
 	delete_session: function(id) {
 		api.delete_session(credentials.username, credentials.password, id, (res) => {
-			get_sessions();
+			get_data();
 			alert(res.message);
 		});
   }

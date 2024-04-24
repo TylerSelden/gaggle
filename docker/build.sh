@@ -1,5 +1,5 @@
 if [ "$#" -lt 1 ]; then
-        echo "./build.sh <container>"
+        echo "./build.sh <container> [dev]"
         exit 1
 fi
 
