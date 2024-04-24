@@ -132,17 +132,26 @@ tr:nth-child(even) {
 	background-color: #c22 !important;
 	color: #fff;
 }
+.exp {
+  background-color: #f70 !important;
+  color: #fff;
+}
 
 
-.changelog p {
+
+.text-panel {
+  padding-bottom: 40px;
+}
+
+.text-panel p {
 	margin: 1em;
 }
 
-.changelog ul {
+.text-panel ul {
 	margin-left: 2em;
 }
 
-.changelog li {
+.text-panel li {
 	margin-bottom: 1em;
 }
 

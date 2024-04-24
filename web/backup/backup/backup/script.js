@@ -3,7 +3,7 @@ var sessions = [];
 var credentials = {};
 
 window.onload = function() {
-	var tmp = document.querySelectorAll("[id]");
+  var tmp = document.querySelectorAll("[id]");
 	tmp.forEach((elem) => {
 		elems[elem.id] = elem;
 	});
@@ -25,19 +25,22 @@ function login() {
 		elems.panel_container.classList.remove("hidden");
 
 		// get listing
-		setInterval(get_sessions, 1000);
-		get_sessions();
+		setInterval(get_data, 1000);
+		get_data();
 	});
 }
 
 
-function get_sessions() {
-	api.get_sessions(elems.username.value, elems.password.value, (res) => {
+function get_data() {
+	api.get_sessions(credentials.username, credentials.password, (res) => {
 		if (res.code !== 0) return alert("Something went wrong.");
 		var sessions = res.data;
 		
-		tier[2].update_table(sessions);
-	});
+    session_manager.update_table(sessions);
+  });
+  api.get_messages(credentials.username, credentials.password, (res) => {
+    message_manager.update_table(res.data);
+  });
 }
 
 

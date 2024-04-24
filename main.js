@@ -123,7 +123,9 @@ app.post('/api/create_message', (req, res) => {
   try {
     if (!auth(req)) return send(res, 2);
 
-    var msg = new message(req.body.username, req.body.msg);
+    var msg = new message(req.body.username, req.body.msg, config.messages.max_length);
+    
+    while (messages.length >= config.messages.max_stored) messages.shift();
     messages.push(msg);
 
     send(res, 0, messages);
@@ -202,29 +204,30 @@ function load_data() {
       messages[i] = tmp.messages[i];
     }
 		console.log(`Restored ${sessions.length} sessions and ${messages.length} messages from ${config.save_file}`);
-		setInterval(refresh, config.refresh_rate);
+		setTimeout(refresh, config.refresh_rate);
 	} catch(e) {
 		console.log(`Could not load sessions: ${e.toString()}`);
 	}
 }
 
-function save_data() {
+function save_data(auto) {
   var data = {
     sessions, messages,
     metadata: {
       sessions_killed: config.kill_sessions_on_stop
     }
   }
-  console.log(`Saving ${config.kill_sessions_on_stop ? "and killing " : ""}${sessions.length} sessions.`);
+  if (!auto) console.log(`Saving ${config.kill_sessions_on_stop ? "and killing " : ""}${sessions.length} sessions.`);
   fs.writeFileSync(config.save_file, JSON.stringify(data, null, 2));
-  console.log(`Saved ${sessions.length} sessions and ${messages.length} messages.`);
+  if (!auto) console.log(`Saved ${sessions.length} sessions and ${messages.length} messages.`);
 }
 
 function refresh() {
   try {
-    save_data();
+    save_data(true);
 		config = JSON.parse(fs.readFileSync('./secrets/config.json', 'utf8'));
-	} catch (e) {
+    setTimeout(refresh, config.refresh_rate);  
+  } catch (e) {
 		console.log("Error in refresh function.");
 	}
 }

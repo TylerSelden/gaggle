@@ -63,5 +63,29 @@ var api = {
 			},
 			callback
 		);
-	}
+  },
+  create_message: function(username, password, msg, callback) {
+    this.call(
+      "POST",
+      `${this.base_url}/create_message`,
+      { username, password, msg },
+      callback
+    );
+  },
+  get_messages: function(username, password, callback) {
+    this.call(
+      "POST",
+      `${this.base_url}/get_messages`,
+      { username, password },
+      callback
+    );
+  },
+  delete_messages: function(username, password, callback) {
+    this.call(
+      "POST",
+      `${this.base_url}/delete_messages`,
+      { username, password },
+      callback
+    );
+  }
 }

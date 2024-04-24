@@ -30,10 +30,10 @@ function session(container, username, password, id, dev) {
 	this.time = Date.now();
 }
 
-function message(username, msg) {
+function message(username, msg, max_length) {
   if (typeof(username) !== "string") throw "Invalid username";
   if (typeof(msg) !== "string" || msg.length < 1) throw "Invalid message";
-
+  if (msg.length > max_length) throw "Message is too long.";
 
   this.msg = msg;
   this.username = username;
