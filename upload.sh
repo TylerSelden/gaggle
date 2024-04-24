@@ -4,9 +4,6 @@ if [ "$#" -ne 1 ]; then
 fi
 
 
-cp -r /var/www/html ./web
-
-
 git add .
 git commit -m "$1"
 git push -u origin main
