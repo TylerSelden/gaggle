@@ -17,4 +17,8 @@ docker build -t kaiushartala/$1:latest ./$BUILD_PATH/$1/.
 # Remove them again for security reasons
 rm -rf ./$BUILD_PATH/$1/app/ssl
 
+# Remove any generated dangling images and build cache objects
+
+docker system prune --force
+
 exit 0

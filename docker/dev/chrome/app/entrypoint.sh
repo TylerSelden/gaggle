@@ -25,3 +25,6 @@ su $VNC_USER -c "export DISPLAY=\":0\" && fluxbox 2> /dev/null &"
 su $VNC_USER -c "export DISPLAY=\":0\" && xterm &"
 su $VNC_USER -c "export DISPLAY=\":0\" && timeout 1 google-chrome-stable --no-sandbox --test-type"
 su $VNC_USER -c "export DISPLAY=\":0\" && watch -n0 google-chrome-stable --no-sandbox --test-type"
+
+# Enter inf loop
+/root/app/loop.sh

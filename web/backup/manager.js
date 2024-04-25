@@ -47,7 +47,7 @@ var session_manager = {
 
     api.create_session(credentials.username, credentials.password, elems.new_session_username.value, elems.new_session_password.value, elems.session_select.value, dev, (res) => {
 			if (res.code !== 0) return alert(res.data);
-			get_sessions();
+			get_data();
 			elems.new_session_username.value = "";
 			elems.new_session_password.value = "";
 			alert("Session created.");
@@ -55,7 +55,7 @@ var session_manager = {
 	},
 	delete_session: function(id) {
 		api.delete_session(credentials.username, credentials.password, id, (res) => {
-			get_sessions();
+			get_data();
 			alert(res.message);
 		});
   }
@@ -64,10 +64,37 @@ var session_manager = {
 
 
 var message_manager = {
-  update_table: function(messages) {
-  
+  update_display: function(messages) {
+    var at_bottom = (Math.ceil(elems.messages_panel.scrollTop) >= elems.messages_panel.scrollHeight - elems.messages_panel.offsetHeight - 1);
+
+    elems.messages_display.innerText = "";
+    for (var i in messages) {
+      message_manager.create_message_elem(messages[i]);
+    }
+    if (at_bottom) elems.messages_panel.scrollTop = elems.messages_panel.scrollHeight;
   },
   create_message_elem: function(message) {
+    var elem = document.createElement("pre");
+    elem.innerText = `${message.username}: ${message.msg}\n`
+    elem.title = `${readable_time(message.time)} ago`;
+    elem.classList.add("message");
 
+    elems.messages_display.appendChild(elem);
+  },
+  create_message: function() {
+    var msg = elems.msg_input.value;
+    if (msg.length < 1) return alert("Your message cannot be empty.");
+    api.create_message(credentials.username, credentials.password, msg, (res) => {
+      if (res.code !== 0) return alert(res.data);
+      get_data();
+      elems.msg_input.value = "";
+    });
+  },
+  delete_messages: function() {
+    if (!confirm("Are you sure you want to clear all messages? This can't be undone.")) return;
+    api.delete_messages(credentials.username, credentials.password, (res) => {
+      if (res.code !== 0) return alert(res.data);
+      alert("Messages cleared.");
+    });
   }
 }

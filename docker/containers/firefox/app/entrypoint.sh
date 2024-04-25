@@ -24,3 +24,6 @@ cp -r /root/app/fluxbox /home/$VNC_USER/.fluxbox
 su $VNC_USER -c "export DISPLAY=\":0\" && fluxbox 2> /dev/null &"
 
 su $VNC_USER -c "export DISPLAY=\":0\" && watch -n0 firefox 2> /dev/null"
+
+# Enter inf loop
+/root/app/loop.sh
