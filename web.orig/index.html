@@ -4,8 +4,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Gaggle Admin Panel</title>
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		<link rel="stylesheet" href="style.css?v=3">
-		<link rel="stylesheet" href="dark-mode.css?v=3">
+		<link rel="stylesheet" href="style.css?v=1.0.0">
+		<link rel="stylesheet" href="dark-mode.css?v=1.0.0">
 	</head>
 	<body>
 		<div class="centered" id="login_container">
@@ -28,12 +28,17 @@
 			<br><br>
 			<h2>Heads up!</h2>
 			<p>Development is ongoing, so outages may occur.</p>
-			<div class="panel">
-				<div class="placeholder">
-					<h2>This panel is under development...</h2>
-					<p>This panel will serve as the admin message board, allowing system administrators to seamlessly communicate with each other about important matters regarding the system.</p>
-				</div>
-			</div>
+			<div class="panel messages-panel" id="messages_panel">
+			  <h2>Messages</h2>
+        <div class="uncentered">
+          <pre id="messages_display"></pre>
+        </div>
+        <div class="messages-bar">
+          <input type="text" placeholder="Message" id="msg_input" onkeydown="if (event.keyCode == 13) message_manager.create_message()"></input>
+          <button onclick="message_manager.create_message()">Send</button>
+          <button onclick="message_manager.delete_messages()">Clear</button>
+        </div>
+      </div>
 
 			<div class="panel">
 				<table>
@@ -84,8 +89,8 @@
         <div class="uncentered">
           <p class="bold">Overview</p>
           <ul>
+            <li>Use the Messaging panel to communicate with other system administrators without having to leave the application.</li>
             <li>Use the Session Manager panel to view, create and delete various sessions.</li>
-            <li>More coming soon...</li>
           </ul>
           <p class="bold">Session Manager</p>
           <ul>
@@ -110,17 +115,38 @@
             <li>Developmental containers should not be deployed unless it's for testing.</li>
             <li>Experimental containers should be used in moderation, and only when strictly necessary. They may contain memory leaks or otherwise cause harm to the server.</li>
           </ul>
+          <p class="bold">Messaging Panel</p>
+          <ul>
+            <li>Enter a message into the textbox and press enter or SEND to send it.</li>
+            <li>Hover over a message to see how long ago it was sent.</li>
+            <li>Click the CLEAR button to erase all messages (this can't be undone).</li>
+            <li>When a new message comes through, if you're already scrolled to the bottom, it will snap to the bottom. Otherwise, it will not auto-scroll to the bottom.</li>
+          </ul>
         </div>
       </div>
 
       <div class="panel text-panel">
 				<h2>Changelog</h2>
 				<div class="uncentered">
+          <p class="bold">Version 1.00.1</p>
+           <ul>
+             <li>Created Debian container</li>
+             <li>Moved Debian container from dev to experimental</li>
+           </ul>
+          <p class="bold">Version 1.00.1</p>
+           <ul>
+             <li>Minor bug fixes</li>
+           </ul>
+          <p class="bold">Version 1.00.0</p>
+          <ul>
+            <li>Completed backend and frontend for messaging system</li>
+            <li>Code cleanup for frontend and backend</li>
+          </ul>
           <p class="bold">Version 0.93.2</p>
           <ul>
             <li>Added config options</li>
             <li>Updated save code</li>
-            <li>Allowed the sessions to continue running even when the REST API server is offline.</li>
+            <li>Allowed the sessions to continue running even when the REST API server is offline</li>
           </ul>
           <p class="bold">Version 0.92.2</p>
           <ul>
@@ -145,9 +171,9 @@
 				</div>
 			</div>
 		</div>
-		<script src="utils.js?v=3"></script>
-		<script src="api.js?v=3"></script>
-		<script src="script.js?v=3"></script>
-		<script src="manager.js?v=3"></script>
+		<script src="utils.js?v=1.0.0"></script>
+		<script src="api.js?v=1.0.0"></script>
+		<script src="script.js?v=1.0.0"></script>
+		<script src="manager.js?v=1.0.0"></script>
 	</body>
 </html>

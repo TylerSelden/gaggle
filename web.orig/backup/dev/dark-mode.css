@@ -1,0 +1,20 @@
+.dark-mode, .dark-mode * {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode header, .dark-mode header > * {
+    background-color: #222;
+}
+
+.dark-mode .panel {
+    border: 2px solid #ccc;
+}
+
+.dark-mode th {
+    background-color: #555;
+}
+
+.dark-mode tr:hover td {
+    background-color: #444 !important;
+}

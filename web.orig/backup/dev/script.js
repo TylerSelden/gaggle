@@ -39,7 +39,9 @@ function get_data() {
     session_manager.update_table(sessions);
   });
   api.get_messages(credentials.username, credentials.password, (res) => {
-    message_manager.update_table(res.data);
+    if (res.code !== 0) return alert("Something went wrong.");
+
+    message_manager.update_display(res.data);
   });
 }
 

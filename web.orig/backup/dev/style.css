@@ -73,7 +73,8 @@ header button {
 	border: 2px solid #000;
 	border-radius: 4px;
 	width: 70vw;
-	min-height: 20vh;
+	max-width: 1000px;
+  min-height: 20vh;
 	max-height: 60vh;
 	overflow-y: scroll;
 	margin-bottom: 30px;
@@ -127,6 +128,52 @@ tr:nth-child(even) {
 	background-color: #ddd;
 }
 
+pre {
+  padding: 0 25px;
+  white-space: pre-wrap;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+#messages_display {
+  min-height: 20vh;
+}
+
+.messages-panel {
+  position: relative;
+}
+
+.message {
+  padding: 0;
+  margin-bottom: 1.75em;
+  color: red;
+}
+
+.message:last-of-type {
+  margin-bottom: 0;
+}
+
+.messages-bar {
+  align-items: center;
+  display: flex;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+}
+
+.messages-bar input {
+  flex: 1;
+  width: 79%;
+  text-align: left;
+}
+.messages-bar button {
+  flex: 0 0 10%;
+  min-width: 70px;
+  height: 34px;
+}
+
+
  /* Color C22  for select options with .dev  when selected */
 .dev {
 	background-color: #c22 !important;
@@ -167,6 +214,10 @@ tr:nth-child(even) {
 
 .hidden {
 	display: none;
+}
+
+.no-style {
+  all: unset;
 }
 
 .red {
