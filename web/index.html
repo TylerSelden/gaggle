@@ -91,10 +91,11 @@
           <ul>
             <li>Use the Messaging panel to communicate with other system administrators without having to leave the application.</li>
             <li>Use the Session Manager panel to view, create and delete various sessions.</li>
+            <li>Navigate to <a href="https://server.benti.dev/client" target="_blank">server.benti.dev/client</a> to use the client proxy</li>
           </ul>
           <p class="bold">Session Manager</p>
           <ul>
-            <li>Obviously, the admin panel is available at <a href="https://server.benti.dev">server.benti.dev</a>.</li>
+            <li>Obviously, the admin panel is available at <a href="https://server.benti.dev" target="_blank">server.benti.dev</a>.</li>
             <li>Spawned sessions are served at server.benti.dev:[8081 + ID] (for example, session 0 would be served at server.benti.dev:8081).</li>
             <li>Sessions have a numerical ID, a container, a username/password, and an uptime value (how long it's been running). The uptime does not refresh after a server crash or halt.</li>
             <li>You can access a session through the link under the ID column. Password authentication is required.</li>
@@ -122,12 +123,24 @@
             <li>Click the CLEAR button to erase all messages (this can't be undone).</li>
             <li>When a new message comes through, if you're already scrolled to the bottom, it will snap to the bottom. Otherwise, it will not auto-scroll to the bottom.</li>
           </ul>
+          <p class="bold">Client Proxy</p>
+          <ul>
+            <li>Since many clients are unable to access the ports that the sessions are served on, a proxy has been created.</li>
+            <li>You can access this proxy at <a href="https://server.benti.dev/client" target="_blank">server.benti.dev/client</a>. It is currently experimental.</li>
+            <li>To join a session, enter the numerical ID of the session (e.g. "1:firefox" = "1") and the password. You will be redirected to a proxy page.</li>
+            <li>Since this is experimental, it's possible it may not be perfect. It was intended only as a hotfix, and a single client page will be created soon with a proxy option.</li>
+          </ul>
         </div>
       </div>
 
       <div class="panel text-panel">
 				<h2>Changelog</h2>
 				<div class="uncentered">
+          <p class="bold">Version 1.22.3</p>
+          <ul>
+            <li>Created client proxy (hotfix) at /client</li>
+            <li>Wrote docs for client proxy</li>
+          </ul>
           <p class="bold">Version 1.20.3</p>
           <ul>
             <li>Emergency git fix</li>

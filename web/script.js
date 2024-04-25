@@ -52,8 +52,8 @@ function save() {
 }
 
 function load() {
-	var data = JSON.parse(localStorage.getItem("gaggle_data"));
-	if (!data) return;
+  var data = JSON.parse(localStorage.getItem("gaggle_data"));
+  if (!data) return;
 
 	credentials = data.credentials;
 	elems.username.value = credentials.username;
