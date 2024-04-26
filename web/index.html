@@ -66,7 +66,7 @@
 							<td>
 								<select id="session_select" onchange="this.className=this.options[this.selectedIndex].className">
 									<option selected="selected" value="firefox">Firefox</option>
-									<option class="exp" value="chrome">Chrome</option>
+									<option value="chrome">Chrome</option>
 									<option class="exp" value="debian">Debian</option>
 								</select>
 							</td>
@@ -91,7 +91,7 @@
           <ul>
             <li>Use the Messaging panel to communicate with other system administrators without having to leave the application.</li>
             <li>Use the Session Manager panel to view, create and delete various sessions.</li>
-            <li>Navigate to <a href="https://server.benti.dev/client" target="_blank">server.benti.dev/client</a> to use the client proxy</li>
+            <li>Navigate to <a href="https://server.benti.dev/client" target="_blank">server.benti.dev/client</a> to use the client proxy.</li>
           </ul>
           <p class="bold">Session Manager</p>
           <ul>
@@ -125,10 +125,8 @@
           </ul>
           <p class="bold">Client Proxy</p>
           <ul>
-            <li>Since many clients are unable to access the ports that the sessions are served on, a proxy has been created.</li>
-            <li>You can access this proxy at <a href="https://server.benti.dev/client" target="_blank">server.benti.dev/client</a>. It is currently experimental.</li>
-            <li>To join a session, enter the numerical ID of the session (e.g. "1:firefox" = "1") and the password. You will be redirected to a proxy page.</li>
-            <li>Since this is experimental, it's possible it may not be perfect. It was intended only as a hotfix, and a single client page will be created soon with a proxy option.</li>
+            <li>The client session portal is available at <a href="https://server.benti.dev/client" target="_blank">server.benti.dev/client</a>.</li>
+            <li>To join a session, enter the numerical ID of the session (e.g. "1:firefox" = "1") and the password. You will be put into the session as soon as you hit enter.</li>
           </ul>
         </div>
       </div>
@@ -136,6 +134,11 @@
       <div class="panel text-panel">
 				<h2>Changelog</h2>
 				<div class="uncentered">
+          <p class="bold">Version 1.25.6</p>
+          <ul>
+            <li>Code cleanup for docker containers</li>
+            <li>Moved Chrome container from experimental to main.</li>
+          </ul>
           <p class="bold">Version 1.25.5</p>
           <ul>
             <li>Created client page (with proxy support)</li>

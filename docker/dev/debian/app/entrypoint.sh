@@ -5,23 +5,17 @@
 useradd -ms /bin/bash $VNC_USER
 echo "$VNC_USER:$VNC_PASSWD" | chpasswd
 
-# Create password for them
+# Create VNC password for them
 su $VNC_USER -c "printf \"$VNC_PASSWD\n$VNC_PASSWD\n\n\" | vncpasswd"
 
-# Start VNC server for them
+# Start VNC server & noVNC
 su $VNC_USER -c "Xtigervnc -desktop $VNC_USER -geometry \"500x500\" -listen tcp -ac -AlwaysShared -AcceptKeyEvents -AcceptPointerEvents -SendCutText -AcceptCutText :0 -PasswordFile ~/.vnc/passwd &"
-
 /root/noVNC/utils/novnc_proxy --cert /root/app/ssl/cert.pem --key /root/app/ssl/privkey.pem &
 
 
 
-
-#su $VNC_USER -c "alias google-chrome-stable=\"google-chrome-stable --no-sandbox\""
-echo "alias google-chrome=\"google-chrome --no-sandbox\"" >> /home/$VNC_USER/.bashrc
-
-
-# Start xfce and such 
-su $VNC_USER -c "cd ~ && startxfce4 2> /dev/null &"
+# Start XFCE4 (restart if user logs out)
+su $VNC_USER -c "cd ~ && watch -n0 startxfce4 2> /dev/null &"
 
 
 # Desktop startup script
@@ -30,7 +24,7 @@ su $VNC_USER -c "cd ~ && startxfce4 2> /dev/null &"
 while [ true ]; do
   if pgrep -x "xfce4-panel" > /dev/null
   then
-    /root/app/xfce-startup.sh >> /home/$VNC_USER/output 2>&1
+    /root/app/xfce-startup.sh
     break
   fi
   sleep 1
