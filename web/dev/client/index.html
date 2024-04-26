@@ -2,14 +2,15 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Gaggle Admin Panel</title>
+		<title>Gaggle</title>
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		<link rel="stylesheet" href="style.css?v=4">
-		<link rel="stylesheet" href="dark-mode.css?v=3">
-	</head>
+		<link rel="stylesheet" href="style.css?v=1.25.5">
+		<link rel="stylesheet" href="dark-mode.css?v=1.25.5">
+    <link rel="stylesheet" href="novnc.css?v=1.25.5">
+  </head>
 	<body>
 		<div class="centered" id="login_container">
-			<header>
+      <header>
 				<h1>Gaggle</h1>
 				<button onclick="document.body.classList.toggle('dark-mode'); save()">Dark Mode</button>
 			</header>
@@ -25,6 +26,9 @@
 			<br><br>
 			<button onclick="login()" id="login">Log in</button>
 		</div>
-		<script src="script.js?v=3"></script>
+    <div id="screen_container" class="hidden">
+      <div id="screen"></div> <!-- If you don't know what this is, I'm sorry but you're an idiot. -->
+    </div>
+		<script src="script.js?v=1.25.5"></script>
 	</body>
 </html>
