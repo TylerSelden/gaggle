@@ -8,10 +8,10 @@ echo "$VNC_USER:$VNC_PASSWD" | chpasswd
 # Create VNC password for them
 su $VNC_USER -c "printf \"$VNC_PASSWD\n$VNC_PASSWD\n\n\" | vncpasswd"
 
-# Start VNC server & noVNC
+# Start VNC server & websockify
 su $VNC_USER -c "Xtigervnc -desktop $VNC_USER -geometry \"500x500\" -listen tcp -ac -AlwaysShared -AcceptKeyEvents -AcceptPointerEvents -SendCutText -AcceptCutText :0 -PasswordFile ~/.vnc/passwd &"
-/root/noVNC/utils/novnc_proxy --cert /root/app/ssl/cert.pem --key /root/app/ssl/privkey.pem &
-
+#/root/noVNC/utils/novnc_proxy --cert /root/app/ssl/cert.pem --key /root/app/ssl/privkey.pem &
+/root/app/websockify/run --cert /root/app/ssl/cert.pem --key /root/app/ssl/privkey.pem 6080 localhost:5900 &
 
 
 # Start XFCE4 (restart if user logs out)

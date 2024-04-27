@@ -4,8 +4,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Gaggle Admin Panel</title>
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		<link rel="stylesheet" href="style.css?v=1.25.5">
-		<link rel="stylesheet" href="dark-mode.css?v=1.25.5">
+		<link rel="stylesheet" href="style.css?v=1.40.0">
+		<link rel="stylesheet" href="dark-mode.css?v=1.40.0">
 	</head>
 	<body>
 		<div class="centered" id="login_container">
@@ -68,7 +68,7 @@
 									<option selected="selected" value="firefox">Firefox</option>
 									<option value="chrome">Chrome</option>
 									<option class="exp" value="debian">Debian</option>
-								</select>
+                </select>
 							</td>
 							<td><button class="green" onclick="session_manager.create_session()">Start</button></td>
 						</tr>
@@ -91,12 +91,12 @@
           <ul>
             <li>Use the Messaging panel to communicate with other system administrators without having to leave the application.</li>
             <li>Use the Session Manager panel to view, create and delete various sessions.</li>
-            <li>Navigate to <a href="https://server.benti.dev/client" target="_blank">server.benti.dev/client</a> to use the client proxy.</li>
+            <li>Navigate to <a href="https://server.benti.dev/client" target="_blank">server.benti.dev/client</a> to enter a session.</li>
           </ul>
           <p class="bold">Session Manager</p>
           <ul>
             <li>Obviously, the admin panel is available at <a href="https://server.benti.dev" target="_blank">server.benti.dev</a>.</li>
-            <li>Spawned sessions are served at server.benti.dev:[8081 + ID] (for example, session 0 would be served at server.benti.dev:8081).</li>
+            <li>Spawned sessions are served at server.benti.dev/client. See Client Portal below.</li>
             <li>Sessions have a numerical ID, a container, a username/password, and an uptime value (how long it's been running). The uptime does not refresh after a server crash or halt.</li>
             <li>You can access a session through the link under the ID column. Password authentication is required.</li>
             <li>Stop a session using the STOP button.</li>
@@ -123,10 +123,11 @@
             <li>Click the CLEAR button to erase all messages (this can't be undone).</li>
             <li>When a new message comes through, if you're already scrolled to the bottom, it will snap to the bottom. Otherwise, it will not auto-scroll to the bottom.</li>
           </ul>
-          <p class="bold">Client Proxy</p>
+          <p class="bold">Client Portal</p>
           <ul>
-            <li>The client session portal is available at <a href="https://server.benti.dev/client" target="_blank">server.benti.dev/client</a>.</li>
+            <li>The Client Portal is available at <a href="https://server.benti.dev/client" target="_blank">server.benti.dev/client</a>.</li>
             <li>To join a session, enter the numerical ID of the session (e.g. "1:firefox" = "1") and the password. You will be put into the session as soon as you hit enter.</li>
+            <li>You can no longer access a session directly through the port it's hosted on, it must be accessed through the Client Portal.</li>
           </ul>
         </div>
       </div>
@@ -134,10 +135,16 @@
       <div class="panel text-panel">
 				<h2>Changelog</h2>
 				<div class="uncentered">
+          <p class="bold">Version 1.40.0</p>
+          <ul>
+            <li>Moved away from each container having a full copy of noVNC, instead each container carries only websockify</li>
+            <li>Only the client web UI can be used to access sessions; they can no longer be accessed directly through their port</li>
+            <li>Large code cleanup</li>
+          </ul>
           <p class="bold">Version 1.25.6</p>
           <ul>
             <li>Code cleanup for docker containers</li>
-            <li>Moved Chrome container from experimental to main.</li>
+            <li>Moved Chrome container from experimental to main</li>
           </ul>
           <p class="bold">Version 1.25.5</p>
           <ul>
@@ -196,9 +203,9 @@
 				</div>
 			</div>
 		</div>
-		<script src="utils.js?v=1.25.5"></script>
-		<script src="api.js?v=1.25.5"></script>
-		<script src="script.js?v=1.25.5"></script>
-		<script src="manager.js?v=1.25.5"></script>
+		<script src="utils.js?v=1.40.0"></script>
+		<script src="api.js?v=1.40.0"></script>
+		<script src="script.js?v=1.40.0"></script>
+		<script src="manager.js?v=1.40.0"></script>
 	</body>
 </html>

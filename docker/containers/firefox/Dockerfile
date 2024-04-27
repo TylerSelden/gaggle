@@ -15,7 +15,6 @@ WORKDIR /root
 
 COPY ./app /root/app
 
-RUN cp -r /root/app/noVNC /root/noVNC
 RUN mkdir /root/.vnc
 
 
