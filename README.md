@@ -352,4 +352,15 @@ The containers run either on Fluxbox (for single-app sessions) or XFCE4 (for ful
 
 ---
 
+## To-Do
+
+- [X] Write an actual README
+- [X] GET params should be encoded in base64 for /client
+- [ ] Implement clipboard transfer
+- [ ] Client should have better streaming quality
+- [ ] Add file transfer
+- [ ] Add a toolbar of some sort
+- [ ] Potentially implement audio streaming somehow
+
+
 Made with ❤️ by [TylerSelden](https://github.com/TylerSelden).
