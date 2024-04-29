@@ -29,7 +29,7 @@ As of now, Gaggle is only available on Linux. This is because of the way Docker 
 
 Run these commands to begin the installation process:
 
-```
+```bash
 # Clone the repository
 git clone https://github.com/TylerSelden/gaggle.git
 cd gaggle
@@ -47,7 +47,7 @@ mkdir ./secrets/ssl
 
 Now, you need to populate `./secrets/`. An example `config.json` is provided below:
 
-```
+```json
 {
   "port": 8080,
   "cert": "./secrets/ssl/cert.pem",
@@ -77,7 +77,7 @@ You need to set up Nginx to serve the static files and proxy the connections. Ru
 
 Now, create a file in this directory with the name of your FQDN (e.g. `./example.com`). Below is an example configuration file:
 
-```
+```nginx
 server {
 	listen 80;
 	server_name <Your FQDN>;
@@ -155,7 +155,7 @@ location ~ ^/session/([0-9]+)/websockify {
 
 Now, run the following commands to restart Nginx with the new configuration:
 
-```
+```bash
 # Remove the default config file
 unlink /etc/nginx/sites-enabled/default
 
@@ -262,7 +262,7 @@ Gaggle stores several confidential files in `./secrets/` (not included in this r
 
 Below is an example `config.json`:
 
-```
+```json
 {
   "port": 8080,
   "cert": "./secrets/ssl/cert.pem",
