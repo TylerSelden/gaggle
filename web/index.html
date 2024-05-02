@@ -46,7 +46,7 @@
 						<tr>
 							<th>ID</th>
 							<th>Username</th>
-							<th>Started</th>
+							<th>Started by</th>
 							<th>Uptime</th>
 							<th>Options</th>
 						</tr>
@@ -62,7 +62,7 @@
 						<tr id="new_session">
 							<td>New</td>
 							<td><input type="text" placeholder="Username" id="new_session_username" onkeydown="if (event.keyCode == 13) session_manager.create_session()"></input></td>
-							<td><input type="text" placeholder="Password" id="new_session_password" onkeydown="if (event.keyCode == 13) session_manager.create_session()"></input></td>
+							<td><input type="password" placeholder="Password" id="new_session_password" onkeydown="if (event.keyCode == 13) session_manager.create_session()"></input></td>
 							<td>
 								<select id="session_select" onchange="this.className=this.options[this.selectedIndex].className">
 									<option selected="selected" value="firefox">Firefox</option>
