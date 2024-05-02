@@ -1,6 +1,12 @@
 # Changelog
 
 
+**Version 1.51.0**
+
+- Updated client page
+- Removed client proxy
+- Updated README.md
+
 **Version 1.50.0**
 
 - Added README.md

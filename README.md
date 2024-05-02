@@ -105,51 +105,6 @@ server {
   location / {
     try_files $uri $uri/ =404;
   }
-
-  # Gaggle session proxy
-  location ~ ^/session/([0-9]+)(.*)$ {
-    set $target_port $1;  # Extract the port from the URL path
-    set $remaining_path $2;  # Capture the rest of the URL path
-
-    set $target_backend "http://127.0.0.1:$target_port";
-
-    # Rewrite URL to remove /session/{port} prefix but keep the rest
-    rewrite ^/session/([0-9]+)(.*)$ /$2 break;
-
-    # Proxy settings
-    proxy_pass $target_backend;
-
-    proxy_http_version 1.1;  # Ensure HTTP/1.1 for WebSocket support
-    proxy_set_header Upgrade $http_upgrade;  # WebSocket upgrade
-    proxy_set_header Connection "upgrade";  # Ensure persistent connection for WebSockets
-
-    # Standard proxy headers for correct client information
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
-}
-
-# WebSocket proxy handling specifically for websockify
-location ~ ^/session/([0-9]+)/websockify {
-    set $target_port $1;
-
-    set $target_backend "http://127.0.0.1:$target_port";
-
-    # WebSocket proxy pass
-    proxy_pass $target_backend;
-
-    # WebSocket-specific headers
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
-
-    # Standard proxy headers
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
-  }
 }
 ```
 
@@ -215,9 +170,9 @@ The **Backend** is a bit more complicated.
 
 Nginx is used for two things:
 1. Serving static web files
-2. Proxying connections to individual sessions
+2. ~~Proxying connections to individual sessions~~ (Removed in version 1.51.0)
 
-The Nginx configuration file is not included in this repository, but it's pretty straightforward. It serves all paths as static files within `./web/`, and `/session` is used as the proxy. For example, if a session was being hosted on port `:8081`, the user would connect via `/session/8081`. The proxy supports both HTTP and WebSocket, which is crucial to the application working properly.
+The Nginx configuration file is not included in this repository, but it's pretty straightforward. It just serves all paths as static files within `./web/`.
 
 ### Bash scripts:
 

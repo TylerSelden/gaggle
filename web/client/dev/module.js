@@ -79,7 +79,8 @@ function readQueryVariable(name, defaultValue) {
 const host = window.location.hostname;
 var port = parseInt(elems.username.value) + 8081;
 var password = elems.password.value;
-var path = `session/${parseInt(elems.username.value) + 8081}`;
+//var path = `session/${parseInt(elems.username.value) + 8081}`;
+var path = `server.benti.dev:${parseInt(elems.username.value) + 8081}/websockify`;
 
 // | | |         | | |
 // | | | Connect | | |
@@ -109,12 +110,28 @@ rfb.addEventListener("connect",  connectedToServer);
 rfb.addEventListener("disconnect", disconnectedFromServer);
 rfb.addEventListener("credentialsrequired", credentialsAreRequired);
 rfb.addEventListener("desktopname", updateDesktopName);
+rfb.addEventListener("clipboard", (event) => {
+  const clipboardText = event.detail.text;
+  // Copy the received text to the client's clipboard
+  navigator.clipboard.writeText(clipboardText)
+
+  oldClipboard = clipboardText;
+});
 
 // Set parameters that can be changed on an active connection
 rfb.viewOnly = readQueryVariable('view_only', false);
 rfb.scaleViewport = readQueryVariable('scale', true);
 
+var oldClipboard = "";
+
 setInterval(() => {
   rfb.resizeSession = true;
+  rfb.qualityLevel = 9;
+
+  navigator.clipboard.readText()
+    .then((clipboardText) => {
+      if (clipboardText !== oldClipboard) rfb.clipboardPasteFrom(clipboardText);
+      oldClipboard = clipboardText;
+    })
 }, 1000);
 
