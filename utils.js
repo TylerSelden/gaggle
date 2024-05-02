@@ -3,7 +3,7 @@ const fs = require('fs');
 var sessions = [];
 var messages = [];
 
-function session(container, username, password, id, dev) {
+function session(container, username, password, started_by, id, dev) {
   // username must be only letters
   // password must be alphanumeric, with !@#$%^&*()_-+= allowed
   // id must be a number
@@ -18,14 +18,18 @@ function session(container, username, password, id, dev) {
 	}
 	if (password == undefined || !/^[ A-Za-z0-9_@./#&+-]*$/.test(password) || password.length > 20 || password.length < 6) {
 		throw "Invalid password";
-	}
+    }
+  if (started_by == undefined || !/^[a-zA-Z]+$/.test(started_by) || started_by.length < 1) {
+    throw "Invalid started_by";
+  }
 	if (id == undefined || !/^[0-9]+$/.test(id)) {
 		throw "Invalid id";
 	}
  
 	this.container = container;
 	this.username = username;
-	this.password = password;
+  this.password = password;
+  this.started_by = started_by;
 	this.id = id;
 	this.time = Date.now();
 }

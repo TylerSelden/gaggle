@@ -1,5 +1,8 @@
 # Changelog
 
+**Version 1.52.0**
+
+- Hide hte password in the Session Manager
 
 **Version 1.51.0**
 

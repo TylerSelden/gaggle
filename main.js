@@ -109,7 +109,7 @@ app.post('/api/create_session', (req, res) => {
 		
 		if (id < 0) id = sessions.length;
 
-		var new_session = new session(container, username, password, id, dev);
+		var new_session = new session(container, username, password, req.body.username, id, dev);
 		sessions[id] = new_session;
 		start_session(id);
 
