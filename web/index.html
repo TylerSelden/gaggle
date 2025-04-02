@@ -4,8 +4,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Gaggle Admin Panel</title>
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		<link rel="stylesheet" href="style.css?v=1.52.0">
-		<link rel="stylesheet" href="dark-mode.css?v=1.52.0">
+		<link rel="stylesheet" href="style.css?v=1.53.0">
+		<link rel="stylesheet" href="dark-mode.css?v=1.53.0">
 	</head>
 	<body>
 		<div class="centered" id="login_container">
@@ -67,6 +67,7 @@
 								<select id="session_select" onchange="this.className=this.options[this.selectedIndex].className">
 									<option selected="selected" value="firefox">Firefox</option>
 									<option value="chrome">Chrome</option>
+                  <option value="tor">Tor</option>
 									<option class="exp" value="debian">Debian</option>
                 </select>
 							</td>
@@ -135,6 +136,13 @@
       <div class="panel text-panel">
 				<h2>Changelog</h2>
 				<div class="uncentered">
+          <p class="bold">Version 1.53.0</p>
+          <ul>
+            <li>Add Tor Browser</li>
+            <li>Move Tor Browser from dev to production</li>
+            <li>Fix URL-encoded password value for /client</li>
+            <li>Change container ports to more-friendly :3000</li>
+          </ul>
           <p class="bold">Version 1.52.0</p>
           <ul>
             <li>Hide the password in the Session Manager</li>
@@ -220,9 +228,9 @@
 				</div>
 			</div>
 		</div>
-		<script src="utils.js?v=1.52.0"></script>
-		<script src="api.js?v=1.52.0"></script>
-		<script src="script.js?v=1.52.0"></script>
-		<script src="manager.js?v=1.52.0"></script>
+		<script src="utils.js?v=1.53.0"></script>
+		<script src="api.js?v=1.53.0"></script>
+		<script src="script.js?v=1.53.0"></script>
+		<script src="manager.js?v=1.53.0"></script>
 	</body>
 </html>

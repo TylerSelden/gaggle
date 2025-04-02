@@ -12,8 +12,7 @@ var session_manager = {
 	create_session_elem: function(session) {
 		if (session !== null) {
 			elems.template_id.innerText = `${session.id}:${session.container}`;
-//			elems.template_id.setAttribute("href", `https://server.benti.dev:${8081 + session.id}`);
-      elems.template_id.setAttribute("href", `https://server.benti.dev/client?id=${btoa(session.id)}&password=${btoa(session.assword)}`);
+      elems.template_id.setAttribute("href", `https://server.benti.dev/client?id=${btoa(session.id)}&password=${btoa(session.password)}`);
       elems.template_username.innerText = session.username;
       elems.template_password.innerText = session.started_by;
 			elems.template_uptime.innerText = readable_time(session.time);

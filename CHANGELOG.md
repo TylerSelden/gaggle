@@ -1,5 +1,12 @@
 # Changelog
 
+**Version 1.53.0**
+
+- Add Tor Browser
+- Move Tor Browser from dev to production
+- Fix URL-encoded password value for `/client`
+- Change container ports to more-friendly `:3000`
+
 **Version 1.52.0**
 
 - Hide hte password in the Session Manager

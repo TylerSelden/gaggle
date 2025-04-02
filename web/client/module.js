@@ -77,10 +77,10 @@ function readQueryVariable(name, defaultValue) {
 //const path = readQueryVariable('path', 'websockify');
 
 const host = window.location.hostname;
-var port = parseInt(elems.username.value) + 8081;
+var port = parseInt(elems.username.value) + 3001;
 var password = elems.password.value;
-//var path = `session/${parseInt(elems.username.value) + 8081}`;
-var path = `server.benti.dev:${parseInt(elems.username.value) + 8081}/websockify`;
+//var path = `session/${parseInt(elems.username.value) + 3001}`;
+var path = `server.benti.dev:${parseInt(elems.username.value) + 3001}/websockify`;
 
 // | | |         | | |
 // | | | Connect | | |

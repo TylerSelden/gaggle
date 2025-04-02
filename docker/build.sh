@@ -1,6 +1,6 @@
 if [ "$#" -lt 1 ]; then
-        echo "./build.sh <container> [dev]"
-        exit 1
+	echo "./build.sh <container> [dev]"
+	exit 1
 fi
 
 BUILD_PATH="containers"
@@ -10,7 +10,7 @@ if [ -n "$2" ]; then
 fi
 
 # Get the SSL files into the build context
-cp -r ../secrets/ssl ./$BUILD_PATH/$1/app/ssl
+cp -r ../../ssl ./$BUILD_PATH/$1/app/ssl
 
 docker build -t kaiushartala/$1:latest ./$BUILD_PATH/$1/.
 

@@ -20,7 +20,7 @@ var api = {
 		}
 		xhr.send(JSON.stringify(data));
 	},
-	base_url: "https://server.benti.dev:8080/api",
+	base_url: "https://server.benti.dev:3000/api",
 	get_user: function(username, password, callback) {
 		this.call(
 			"POST",
