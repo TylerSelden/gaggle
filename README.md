@@ -1,5 +1,7 @@
 # Gaggle
 
+## WARNING: *Gaggle is deprecated, buggy and contains several very SERIOUS security vulnerabilities. DO NOT use Gaggle, especially if your implementation is public-internet-facing. It is vulnerable to brute-force, DoS, and (authenticated) RCE attacks.* A newer, sleeker replacement is currently in the works.
+
 Gaggle is a free, open-source remote desktop application powered by Docker. It uses a combination of Docker, Nginx, and Express.js to run. Gaggle is designed to be a simple, easy-to-use application that can be accessed from any device with a browser.
 
 ## Important details
